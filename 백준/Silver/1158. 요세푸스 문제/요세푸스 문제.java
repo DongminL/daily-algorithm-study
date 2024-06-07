@@ -21,7 +21,7 @@ public class Main {
         int cnt = 0;
         int current;
         while (n > 1) {
-            cnt = (cnt + (k - 1)) % n;
+            cnt = (cnt-1 + k) % n;
             current = circle.remove(cnt);
 
             sb.append(current).append(", ");
