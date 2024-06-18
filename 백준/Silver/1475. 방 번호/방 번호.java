@@ -8,7 +8,7 @@ public class Main {
 
         String n = br.readLine();
 
-        int[] check = new int[10];
+        int[] check = new int[9];
         int max = Integer.MIN_VALUE;
 
         for (int i = 0; i < n.length(); i++) {
