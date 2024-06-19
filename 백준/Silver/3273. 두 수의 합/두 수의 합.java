@@ -24,7 +24,7 @@ public class Main {
         int cnt = 0;
         int sum = 0;
         
-        while (start < end && (values[end] > x/2.0)) {
+        while (start < end) {
             sum = values[start] + values[end];
             
             if (sum == x) {
@@ -35,6 +35,10 @@ public class Main {
                 start++;
             } else {
                 end--;
+                
+                if (values[end] <= x/2.0) {
+                    break;
+                }
             }
         }
         
