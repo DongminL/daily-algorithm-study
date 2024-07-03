@@ -3,11 +3,9 @@ import java.util.*;
 
 public class Main {
     
-    static int n;
-    static int[] level;
-    static long cnt = 0;
-    
-    static void teamChoice() {
+    static void teamChoice(int n, int[] level) {
+        long cnt = 0;
+        
         for (int i = 0; i < n; i++) {
             if (level[i] > 0) {
                 break;
@@ -53,16 +51,16 @@ public class Main {
         System.out.println(cnt);
     }
     
-    static int combin(int k) {
-        return k * (k - 1) / 2;
+    static int combin(int n) {
+        return n * (n-1) / 2;
     }
     
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         
-        n = Integer.parseInt(br.readLine());
-        level = new int[n];
+        int n = Integer.parseInt(br.readLine());
+        int[] level = new int[n];
         
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
@@ -71,6 +69,6 @@ public class Main {
         
         Arrays.sort(level);
         
-        teamChoice();
+        teamChoice(n, level);
     }
 }
