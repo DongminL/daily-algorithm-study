@@ -25,7 +25,7 @@ public class Main {
         
         // 0~9로 끝나는 계단 수의 합 구하기
         for (int i = 0; i < 10; i++) {
-            result += (stairs[n][i] % 1000000000);
+            result += stairs[n][i];
         }
         
         System.out.println(result % 1000000000);
