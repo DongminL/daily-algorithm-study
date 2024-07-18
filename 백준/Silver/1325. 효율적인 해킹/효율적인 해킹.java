@@ -3,19 +3,21 @@ import java.util.*;
 
 public class Main {
 
-    static int n, m;
-    static ArrayList<Integer>[] list;    // 인접 리스트
-    static boolean[] visited;    // 방문한 노드 체크
-    static int[] linked;    // 각 컴퓨터의 신뢰 횟수
-    static int max = 0;    // 가장 많이 신뢰 받은 횟수
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    int n;    // N개의 컴퓨터의 개수
+    int m;    // M개의 신뢰관계의 개수
+    ArrayList<Integer>[] list;    // 인접 리스트
+    boolean[] visited;    // 방문한 노드 체크
+    int[] linked;    // 각 컴퓨터의 신뢰 횟수
+    int max = 0;    // 가장 많이 신뢰 받은 횟수
+
+    private void solution() throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        n = Integer.parseInt(st.nextToken());    // N개의 컴퓨터의 개수
-        m = Integer.parseInt(st.nextToken());    // M개의 신뢰관계의 개수
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
 
         // 배열 및 리스트 초기화
         linked = new int[n+1];
@@ -69,7 +71,11 @@ public class Main {
             }
         }
 
-        bw.flush();
+        bw.flush();    // 결과 출력
         bw.close();
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Main().solution();
     }
 }
