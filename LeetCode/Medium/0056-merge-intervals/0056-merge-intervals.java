@@ -20,9 +20,7 @@ class Solution {
                 overlap.add(prevInterval);
                 // 이전 인터벌을 현재 탐색중인 인터벌로 갱신
                 prevInterval = intervals[i];
-            }
-            // 이전 인터벌과 현재 탐색중인 인터벌이 겹치는 경우
-            else {
+            } else {  // 이전 인터벌과 현재 탐색중인 인터벌이 겹치는 경우
                 // 이전 인터벌의 종료점을 두 인터벌의 종료점 중 큰 값으로 갱신
                 prevInterval[1] = Math.max(prevInterval[1], intervals[i][1]);
             }
