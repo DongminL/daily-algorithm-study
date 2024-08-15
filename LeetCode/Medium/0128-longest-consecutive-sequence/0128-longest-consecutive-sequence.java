@@ -27,8 +27,6 @@ class Solution {
 
                 max = Math.max(max, length); // 최대 길이 갱신
             }
-
-            
         }
 
         return max;
