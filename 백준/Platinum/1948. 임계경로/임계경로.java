@@ -20,7 +20,7 @@ public class Main {
     private int countRoad(int end, int[] times) {
         Deque<Integer> queue = new ArrayDeque<>();
         boolean[] visited = new boolean[n+1];    // 각 도시를 방문한 여부
-        AtomicInteger count = new AtomicInteger(0);    // 임계 경로의 도로의 수
+        int[] count = {0};    // 임계 경로의 도로의 수
 
         // 종료 도시 큐에 삽입
         queue.offerLast(end);
@@ -32,7 +32,7 @@ public class Main {
             reversePaths[cur].stream()
                     // 임계 경로에 해당하는 경우
                     .filter(road -> times[cur] == times[road.dest] + road.hour)
-                    .peek(road -> count.incrementAndGet())  // 도로의 수 +1 증가
+                    .peek(road -> count[0]++)  // 도로의 수 +1 증가
                     .filter(road -> !visited[road.dest])  // 아직 방문하지 않은 도시일 때
                     .forEach(road -> {
                         queue.offerLast(road.dest);
@@ -40,7 +40,7 @@ public class Main {
                     });
         }
 
-        return count.get();
+        return count[0];
     }
 
     /* 임계 경로 구하기 (위상 정렬) */
