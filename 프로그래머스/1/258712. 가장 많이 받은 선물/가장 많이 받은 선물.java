@@ -52,19 +52,14 @@ class Solution {
         // 두 사람이 선물을 주고받은 기록이 있다면
         if (giftCount[A][B] > giftCount[B][A]) {
             return true;
-        } else if (giftCount[A][B] < giftCount[B][A]) {
-            return false;
             
-        } else {    // 두 사람이 선물을 주고받은 기록이 하나도 없거나 주고받은 수가 같다면
+        } else if (giftCount[A][B] == giftCount[B][A]) {    // 두 사람이 선물을 주고받은 기록이 하나도 없거나 주고받은 수가 같다면
             if (giftFactor[A] > giftFactor[B]) {
                 return true;
             }
             
-            if (giftFactor[A] < giftFactor[B]) {
-                return false;
-            }
-            
-            return false;  // 선물 지수도 같은 경우
-        }
+        } 
+        
+        return false;   // 그 외
     }
 }
