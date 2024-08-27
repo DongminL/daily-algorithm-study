@@ -3,7 +3,7 @@ import java.util.stream.IntStream;
 
 class Solution {
     public int[] solution(int[] array, int[][] commands) {
-        List<Integer> answer = new ArrayList<>();
+        int[] answer = new int[commands.length];
         
         IntStream.range(0, commands.length).forEach(i -> {
             // startIdx ~ endIdx - 1 인덱스를 복사
@@ -15,9 +15,9 @@ class Solution {
             Arrays.sort(temp);
             
             // k번째에 있는 수 추가
-            answer.add(temp[commands[i][2] - 1]);
+            answer[i] = temp[commands[i][2] - 1];
         });
         
-        return answer.stream().mapToInt(i -> i).toArray();
+        return answer;
     }
 }
