@@ -10,7 +10,7 @@ class Solution {
             n2 = n1;
             n1 = answer;
             
-            answer = ((n1 % DIV) + (n2 % DIV)) % DIV;
+            answer = (n1 + n2) % DIV;
         }
         
         return (int) answer;
