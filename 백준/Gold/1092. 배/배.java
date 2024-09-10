@@ -19,18 +19,24 @@ class Solution {
         while (m > 0) {
             // 박스와 크레인 무게 비교
             for (int i = n - 1; i > -1; i--) {
-                for (int j = boxes.length - answer - 1; j > -1; j--) {
-                    if (!moved[j]) {
-                        // 크레인에 맞는 다른 박스 찾기
-                        if (cranes[i] < boxes[j]) {
-                            continue;
-                        }
+                // 모든 상자를 옮겼을 때
+                if (m < 1) {
+                    break;
+                }
 
-                        // 배로 옮길 때
-                        moved[j] = true;
-                        m--;
-                        break;
+                for (int j = boxes.length - answer - 1; j > -1; j--) {
+                    if (moved[j]) {
+                        continue;
                     }
+                    // 크레인에 맞는 다른 박스 찾기
+                    if (cranes[i] < boxes[j]) {
+                        continue;
+                    }
+
+                    // 배로 옮길 때
+                    moved[j] = true;
+                    m--;
+                    break;
                 }
             }
 
