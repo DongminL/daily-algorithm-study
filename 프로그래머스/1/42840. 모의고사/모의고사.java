@@ -35,7 +35,7 @@ class Solution {
         // 가장 많이 맞춘 사람 추가
         IntStream.range(1, answerCount.length)
             .filter(i -> answerCount[i] == max)
-            .forEach(i -> result.add(i));
+            .forEach(result::add);
         
         
         return result.stream().mapToInt(i -> i).toArray();
