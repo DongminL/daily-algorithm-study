@@ -13,6 +13,6 @@ class Solution {
             answer = (n1 + n2) % DIV;
         }
         
-        return (int) answer;
+        return (int) answer % DIV;
     }
 }
