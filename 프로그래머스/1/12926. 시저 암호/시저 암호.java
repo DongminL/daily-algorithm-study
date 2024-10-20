@@ -1,6 +1,7 @@
 class Solution {
     public String solution(String s, int n) {
         String answer = ""; // s를 n만큼 민 암호문
+        final int ALPHABET_COUNT = 26;  // 알파벳 개수
         
         // 시저 암호 만들기
         for (char c : s.toCharArray()) {
@@ -10,26 +11,14 @@ class Solution {
                 continue;
             }
             
-            // n만큼 민 글자
-            int nextChar = c + n;
-            
-            if (c >= 'A' && c <= 'Z') {    // 알파벳 대문자
+            // 알파벳을 n만큼 밀어내기
+            if (c >= 'A' && c <= 'Z') {    // 대문자
+                // 순환 구조
+                answer += (char) ((c - 'A' + n) % ALPHABET_COUNT + 'A');
                 
-                // 대문자 순환 구조
-                if (nextChar > 'Z') {
-                    answer += (char) (nextChar % ('Z' + 1) + 'A');
-                } else {
-                    answer += (char) nextChar;
-                }
-                
-            } else {    // 알파벳 소문자
-                
-                // 소문자 순환 구조
-                if (nextChar > 'z') {
-                    answer += (char) (nextChar % ('z' + 1) + 'a');
-                } else {
-                    answer += (char) nextChar;
-                }
+            } else {    // 소문자
+                // 순환 구조
+                answer += (char) ((c - 'a' + n) % ALPHABET_COUNT + 'a');
             }
         }
         
