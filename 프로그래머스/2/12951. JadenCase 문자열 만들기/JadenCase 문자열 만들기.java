@@ -12,11 +12,8 @@ class Solution {
             if (s.charAt(i) == ' ') {
                 jadenCase.append(" ");
                 
-                // 다음 인덱스에 단어가 있을 때
-                if (i  < s.length() - 1 && s.charAt(i+1) != ' ') {
-                    isWordFirst = true;
-                }
-                
+                // 다음에 글자가 나오면 무조건 단어의 첫 글자
+                isWordFirst = true;
                 continue;
             }
             
