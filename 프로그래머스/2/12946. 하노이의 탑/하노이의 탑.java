@@ -2,35 +2,31 @@ import java.util.*;
 
 class Solution {
     
-    List<int[]> answer;
+    private List<int[]> answer; // n개의 원판을 3번 기둥으로 최소로 옮기는 방법
     
     public int[][] solution(int n) {
         answer = new ArrayList<>();
         
+        // 원판의 개수와 각 기둥의 번호 지정
         hanoi(n, 1, 2, 3);
         
         return answer.stream().toArray(int[][]::new);
     }
     
-    /* 
-        하노이의 탑
-        start: 출발지 / mid: 원판을 옮기기 위한 중간 다리 역할 / end: 도착지
-        초기값 -> start: 1, mid: 2, end: 3
-    */
-    private void hanoi(int n, int start, int mid, int end) {
-        // 1개의 원판만 옮길 때, 1 -> 3으로 옮김
-        if (n == 1) {
+    private void hanoi(int movingDiskCount, int start, int mid, int end) {
+        // 원판을 옮길 때 마지막 번째 때 기록
+        if (movingDiskCount == 1) {
             answer.add(new int[] {start, end});
             return;
         }
         
-        // 맨 밑에 원판을 옮기기 위해 n-1개의 원판을 1 -> 2로 옮길 때
-        hanoi(n-1, start, end, mid);
+        // (전체 원판의 개수 - 1)개를 start -> mid 기둥으로 옮김
+        hanoi(movingDiskCount-1, start, end, mid);
         
-        // 맨 밑에 원판을 1 -> 3로 옮길 때
+        // 기둥에 하나의 원판만 남았을 경우
         answer.add(new int[] {start, end});
         
-        // n-1개의 원판을 2 -> 3으로 옮길 때
-        hanoi(n-1, mid, start, end);
+        // 남아있는 원판을 end 기둥으로 옮김
+        hanoi(movingDiskCount-1, mid, start, end);
     }
 }
