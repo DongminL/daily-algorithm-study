@@ -9,27 +9,27 @@ class Solution {
         }
         
         // 인덱스의 크기가 작을수록 교체 우선순위가 높음
-        List<String> cache = new ArrayList<>(cacheSize);
+        Deque<String> cacheQueue = new ArrayDeque<>(cacheSize);
         
         for (String city : cities) {
             String lowerName = city.toLowerCase();
             
             // cache hit
-            if (cache.contains(lowerName)) {
+            if (cacheQueue.contains(lowerName)) {
                 answer += 1;
                 
                 // 맨 뒤로 순서 변경
-                cache.remove(lowerName);
-                cache.add(lowerName);
+                cacheQueue.remove(lowerName);
+                cacheQueue.offerLast(lowerName);
                 continue;
             }
             
             // cache miss
-            if (cache.size() < cacheSize) {
-                cache.add(lowerName);
+            if (cacheQueue.size() < cacheSize) {
+                cacheQueue.offerLast(lowerName);
             } else {    // 캐시 공간이 가득 찼을 때
-                cache.remove(0);
-                cache.add(lowerName);
+                cacheQueue.pollFirst();
+                cacheQueue.offerLast(lowerName);
             }
             answer += 5;
         }
