@@ -1,85 +1,88 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
-    
-    static boolean[] visited;    // 방문한 노드 체크
-    static ArrayList<Integer>[] list;    // 인접 리스트
+class Solution {
 
-    static String search(int n, int v) {
+    private List<Integer>[] graph;  // 주어진 엣지에 따른 인접 리스트
+    private boolean[] visited;  // 각 노드에 방문 여부
+    private StringBuilder answer = new StringBuilder(); // 결과 출력
+
+    public void solution(int n, int m, int startNode, int[][] edges) {
+        // 인접 리스트 만들기
+        graph = new ArrayList[n + 1];
+        for (int i = 1; i <= n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        for (int[] edge : edges) {
+            // 양방향 엣지
+            graph[edge[0]].add(edge[1]);
+            graph[edge[1]].add(edge[0]);
+        }
+
         // 번호가 작은 노드부터 방문
         for (int i = 1; i <= n; i++) {
-            list[i].sort(Comparator.naturalOrder());
+            graph[i].sort(Comparator.naturalOrder());
         }
 
-        dfs(v); // DFS
-        visited = new boolean[n+1]; // 방문 리스트 초기화
-        String bfsResult = bfs(v); // BFS
+        visited = new boolean[n + 1];
+        dfs(startNode);
+        answer.append("\n");
+        visited = new boolean[n + 1];
+        bfs(startNode);
 
-        return "\n" + bfsResult;
+        System.out.println(answer);
     }
 
-    /* BFS (너비 우선 탐색) */
-    static String bfs(int v) {
-        StringBuilder sb = new StringBuilder();
-        Deque<Integer> queue = new ArrayDeque<>();;    // BFS의 Queue
+    private void dfs(int node) {
+        visited[node] = true;
+        answer.append(node).append(" ");
 
-        queue.offerLast(v);
-        visited[v] = true;
+        // 아직 방문하지 않은 주위 노드로 이동
+        for (int next : graph[node]) {
+            if (!visited[next]) {
+                dfs(next);
+            }
+        }
+    }
 
-        // BFS
+    private void bfs(int startNode) {
+        Queue<Integer> queue = new ArrayDeque<>();
+
+        // 시작 노드 설정
+        queue.offer(startNode);
+        visited[startNode] = true;
+
         while (!queue.isEmpty()) {
-            int node = queue.pollFirst();   // FIFO
-            sb.append(node).append(" ");
+            int current = queue.poll(); // 현재 위치
+            answer.append(current).append(" ");
 
-            // 인접 리스트 탐색
-            list[node].stream()
-                    .filter(e -> !visited[e])
-                    .forEach(e -> {
-                visited[e] = true;
-                queue.offerLast(e);
-            });
+            // 아직 방문하지 않은 주위 노드로 이동
+            for (int next : graph[current]) {
+                if (!visited[next]) {
+                    queue.offer(next);
+                    visited[next] = true;
+                }
+            }
         }
-
-        return sb.toString();
     }
+}
 
-    /* DFS (깊이 우선 탐색) */
-    static void dfs(int v) {
-        // 방문 안 한 노드를 탐색
-        visited[v] = true;
-        System.out.print(v + " ");
-        list[v].stream()
-                .filter(e -> !visited[e])
-                .forEach(e -> dfs(e));
-    }
+public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(st.nextToken());    // 정점의 개수
-        int m = Integer.parseInt(st.nextToken());    // 간선의 개수
-        int v = Integer.parseInt(st.nextToken());    // 시작할 노드의 번호
+        // 0: 정점의 개수 n, 1: 간선의 개수 m, 2: 탐색을 시작할 정점의 번호 v
+        int[] graphInfo = Arrays.stream(br.readLine().split(" "))
+            .mapToInt(Integer::parseInt).toArray();
 
-        // 배열 및 인접 리스트 초기화
-        visited = new boolean[n+1];
-        list = new ArrayList[n+1];
-        for (int i = 0; i <= n; i++) {
-            list[i] = new ArrayList<>();
+        // [i][0] <-> [i][1] 엣지
+        int[][] edges = new int[graphInfo[1]][2];
+        for (int i = 0; i < graphInfo[1]; i++) {
+            edges[i] = Arrays.stream(br.readLine().split(" "))
+                .mapToInt(Integer::parseInt).toArray();
         }
 
-        // 인접 리스트 구성
-        for (int i = 0; i < m; i++) {
-            st = new StringTokenizer(br.readLine());
-            int s = Integer.parseInt(st.nextToken());    // 간선의 시작 노드
-            int e = Integer.parseInt(st.nextToken());    // 간선의 끝 노드
-
-            // 양방향 엣지
-            list[s].add(e);
-            list[e].add(s);
-        }
-
-        System.out.println(search(n, v));
+        new Solution().solution(graphInfo[0], graphInfo[1], graphInfo[2], edges);
     }
 }
