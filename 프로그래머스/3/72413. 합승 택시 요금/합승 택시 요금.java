@@ -19,13 +19,15 @@ class Solution {
             routes[fare[1]].add(new Taxi(fare[0], fare[2]));
         }
         
+        
+        int[] routeOfStart = dijkstra(n, s);    // s 지점부터 시작한 최소 요금
+        int[] routeOfA = dijkstra(n, a);    // a 지점부터 시작한 최소 요금
+        int[] routeOfB = dijkstra(n, b);    // b 지점부터 시작한 최소 요금
+        
         // 합승 택시 요금의 최소 요금 구하기
-        int[] commonRoute = dijkstra(n, s);
         for (int i = 1; i <= n; i++) {
-            int[] leaveLocationFare = dijkstra(n, i);   // i 지점에서 서로 떠났을 때
-            
-            // 출발지부터 i 지역까지 같이 타고, i 지역부터 따로 갈 때의 비용
-            int fare = commonRoute[i] + leaveLocationFare[a] + leaveLocationFare[b];
+            // 양방향 엣지이기 때문에 시작 지점과 출발 지점이 바껴도 똑같음
+            int fare = routeOfStart[i] + routeOfA[i] + routeOfB[i];
             answer = Math.min(answer, fare);
         }
         
