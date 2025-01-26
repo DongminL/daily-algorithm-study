@@ -3,27 +3,25 @@ import java.util.*;
 
 class Solution {
 
-    public static int solution(int c, int[][] promotions) {
-        // c명 늘이기 위해 형택이가 투자해야 하는 돈의 최솟값
-        int answer = 10_000_001;
+    public int solution(int c, int n, int[][] ads) {
+        // 형택이가 투자해야 하는 돈의 최솟값
+        int answer = 2_000_000;
 
-        // i명의 고객을 유치하기 위한 최소 비용 (i: 0 ~ c+100 까지)
+        // i 명의 고객을 얻는 데 드는 비용
         int[] dp = new int[c + 101];
-        Arrays.fill(dp, 10_000_001);     // 최소값을 찾기 위한 초기값 설정
-        dp[0] = 0;  // 고객을 0명 유치하는데 드는 비용은 0
+        Arrays.fill(dp, answer);
+        dp[0] = 0;  // 0명 유치 비용
 
-        // 각 도시별 프로모션 정보 처리
-        for (int[] p : promotions) {
-            int cost = p[0];   // 홍보 비용
-            int people = p[1]; // 그 비용으로 얻는 고객 수
+        for (int[] ad : ads) {
+            int cost = ad[0];   // 홍보비
+            int peopleCount = ad[1];  // 홍보로 늘어나는 사람 수
 
-            // 거꾸로 처리하여 같은 홍보가 여러 번 적용되지 않게 함
-            for (int i = people; i < dp.length; i++) {
-                dp[i] = Math.min(dp[i], dp[i - people] + cost);
+            // peopleCount ~ peopleCount + 100까지 최소값을 갱신하며 
+            for (int i = peopleCount; i < dp.length; i++) {
+                dp[i] = Math.min(dp[i], dp[i - peopleCount] + cost);
             }
         }
 
-        // 고객이 c 이상일 때, 홍보비의 최소값 찾기
         for (int i = c; i < dp.length; i++) {
             answer = Math.min(answer, dp[i]);
         }
@@ -34,24 +32,20 @@ class Solution {
 
 public class Main {
 
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
     public static void main(String[] args) throws IOException {
-        int[] arr = toArray();
-        int c = arr[0];  // 최소 고객 수
-        int n = arr[1];  // 도시의 개수
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int[][] promotions = new int[n][2];
-        for (int i = 0; i < n; i++) {
-            promotions[i] = toArray();
+        // 0: 호텔이 늘릴려는 최소 고객의 수 C, 1: 도시의 개수 N
+        int[] inputInfo = Arrays.stream(br.readLine().split(" "))
+            .mapToInt(Integer::parseInt).toArray();
+
+        // {i 번째 도시에서 발생하는 홍보비, 홍보비로 얻을 수 있는 고객의 수}
+        int[][] ads = new int[inputInfo[1]][2];
+        for (int i = 0; i < inputInfo[1]; i++) {
+            ads[i] = Arrays.stream(br.readLine().split(" "))
+                .mapToInt(Integer::parseInt).toArray();
         }
 
-        System.out.println(Solution.solution(c, promotions));
-    }
-
-    private static int[] toArray() throws IOException {
-        return Arrays.stream(br.readLine().split(" "))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+        System.out.println(new Solution().solution(inputInfo[0], inputInfo[1], ads));
     }
 }
