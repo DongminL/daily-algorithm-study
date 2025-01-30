@@ -13,7 +13,7 @@ class Solution {
         for (int won : money) {
             for (int current = won; current <= n; current++) {
                 // i원을 만드는 경우의 수 : 
-                // (현재 만들려는 돈의 경우의 수 - 해당 동전을 만드는 경우의 수)
+                // (현재 만들려는 돈의 경우의 수) + (만들려는 돈 - 해당 돈)의 경우의 수
                 dp[current] += dp[current - won];   
             }
         }
