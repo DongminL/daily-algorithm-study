@@ -15,10 +15,12 @@ class Solution {
             if (-1 <= lengthDifference && lengthDifference <= 1) {
                 int different = countDifferent(firstWordCount, countSpelling(word));
 
+                // 동일한 구성이거나, 하나의 문자만 추가하거나 빼는 경우
                 if (different <= 1) {
                     answer++;
                 }
-                
+
+                // 하나의 문자를 다른 문자로 변경하는 경우
                 if (different == 2 && lengthDifference == 0) {
                     answer++;
                 }
@@ -37,16 +39,17 @@ class Solution {
         return Collections.unmodifiableMap(count);
     }
 
+    // 두 단어의 문자 개수의 차이
     private int countDifferent(
         Map<Character, Integer> base,
         Map<Character, Integer> target
     ) {
-        // 두 단어에 나오는 모든 스펠링
+        // 두 단어에 나오는 모든 문자
         Set<Character> spelling = new HashSet<>();
         spelling.addAll(base.keySet());
         spelling.addAll(target.keySet());
 
-        // 스펠링별 개수 차이 누적하기
+        // 문자별 개수 차이 누적하기
         int differentCount = 0;
         for (char c : spelling) {
             int baseCount = base.getOrDefault(c, 0);
