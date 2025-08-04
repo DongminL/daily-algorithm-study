@@ -4,7 +4,8 @@ import java.util.*;
 class Solution {
 
     public int[] solution(int n, int[] nums) {
-        int[] answer = new int[n];  // 각 수를 1,2,3을 더하여 만들 수 있는 경우의 수
+        // 각 수를 1,2,3을 더하여 만들 수 있는 경우의 수
+        int[] answer = new int[n];
 
         int maxNum = Arrays.stream(nums).max().getAsInt();
         int[] dp = new int[maxNum + 1];
@@ -44,6 +45,7 @@ public class Main {
             nums[i] = Integer.parseInt(br.readLine());
         }
 
+        // 결과 출력
         int[] answer = new Solution().solution(n, nums);
         Arrays.stream(answer).forEach(System.out::println);
     }
