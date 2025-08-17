@@ -8,15 +8,14 @@ class Solution {
     public int solution(String word) {
         visited = new ArrayList<>();
         
-        // 사전에서의 순번 찾기
-        int answer = dfs(word, "");
+        int answer = searchOrder(word, "");
         
         return answer;
     }
     
-    /* 해당 단어까지 사전에 있는 단어들 탐색 (DFS) (찾는 단어, 현재 단어) */
-    private int dfs(String targetWord, String curWord) {
-        // 5글자까지만 탐색가능하도록 설정
+    // 사전에서의 순번 찾기 (DFS)
+    private int searchOrder(String targetWord, String curWord) {
+        // 5글자까지만 탐색
         if (curWord.length() > 4) {
             return -1;
         }
@@ -32,8 +31,8 @@ class Solution {
                 return visited.size();  // 이 단어가 마지막으로 추가되기 때문
             }
                 
-            // 재귀 호출의 반환값을 체크
-            int result = dfs(targetWord, nextWord);
+            // 재귀 호출로 깊이 탐색
+            int result = searchOrder(targetWord, nextWord);
             
             // 단어를 찾은 경우 즉시 반환
             if (result != -1) { 
@@ -41,6 +40,6 @@ class Solution {
             }
         }
 
-        return -1; // 단어를 찾지 못한 경우
+        return -1; // 끝내 단어를 찾지 못한 경우
     }
 }
