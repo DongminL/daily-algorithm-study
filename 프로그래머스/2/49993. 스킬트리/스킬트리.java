@@ -1,14 +1,18 @@
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.*;
 
 class Solution {
+    
     public int solution(String skill, String[] skill_trees) {
-        int answer = 0; // 가능한 스킬트리 개수
+        // 가능한 스킬트리 개수
+        int answer = 0; 
         
         // String skill -> Set<Character>
-        Set<Character> singleSkills = new HashSet<>(skill.chars()
-                                                     .mapToObj(c -> (char) c)
-                                                     .collect(Collectors.toList()));
+        Set<Character> singleSkills = new HashSet<>(
+            skill.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.toList())
+        );
         
         // 유저가 만든 스킬트리가 유효한지 검사
         for (String s : skill_trees) {
