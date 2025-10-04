@@ -2,10 +2,11 @@ import java.util.*;
 
 class Solution {
     public int solution(int n, int[][] results) {
-        int answer = 0; // 정확한 순위를 매길 수 있는 선수의 수
+        // 정확한 순위를 매길 수 있는 선수의 수
+        int answer = 0; 
         
-        // results -> 인접 행렬로 변환
-        int[][] matrix = new int[n+1][n+1]; // 선수간의 승패 여부
+        // 선수간의 승패 여부
+        int[][] matrix = new int[n+1][n+1]; 
         for (int[] r : results) {
             matrix[r[0]][r[1]] = 1; // A가 B를 이길 때
             matrix[r[1]][r[0]] = -1; // B가 A에게 질 때
