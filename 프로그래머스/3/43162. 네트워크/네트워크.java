@@ -6,12 +6,11 @@ class Solution {
     boolean[] visited;  // 각 컴퓨터에 방문한 여부
     
     public int solution(int n, int[][] computers) {
-        // 초기화
         visited = new boolean[n];
         list = new ArrayList[n];
         Arrays.setAll(list, ArrayList::new);
         
-        // 네트워크를 인접 리스트로 표현
+        // 네트워크를 인접 리스트로 나타내기
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (i != j && computers[i][j] == 1) {
@@ -33,16 +32,17 @@ class Solution {
         return answer;
     }
     
-    /* 네트워크의 개수 탐색 (DFS) */
-    private void dfs(int start, int depth, int n) {
-        if (depth > n) {
+    // 네트워크의 개수 탐색 (DFS)
+    private void dfs(int start, int count, int n) {
+        // 네트워크 속 컴퓨터 개수가 최대치를 넘으면 종료
+        if (count > n) {
             return;
         }
         
         for (int next : list[start]) {
             if (!visited[next]) {
                 visited[next] =true;
-                dfs(next, depth+1, n);
+                dfs(next, count + 1, n);
             }
         }
     }
