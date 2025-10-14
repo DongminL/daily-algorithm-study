@@ -2,7 +2,9 @@ import java.util.*;
 
 class Solution {
     public String solution(String number, int k) {
+        // number에서 k 개의 수를 제거했을 때 만들 수 있는 수 중 가장 큰 숫자
         StringBuilder answer = new StringBuilder();
+        
         int start = 0;  // 시작 인덱스
         
         // k개의 수를 제거할 때 가장 큰 숫자 구하기
@@ -14,7 +16,7 @@ class Solution {
             for (int i = start; i < len; i++) {
                 if (max < number.charAt(i) - '0') {
                     max = number.charAt(i) - '0';
-                    start = i + 1;  // 다음 구간을 지정하기 위함
+                    start = i + 1;  // 다음 구간으로 넘어가기
                 }
             }
             
