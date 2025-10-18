@@ -6,14 +6,16 @@ class Solution {
             return K;
         }
         
-        int answer = 0; // 섞어야 하는 최소 횟수
-        PriorityQueue<Long> pq = new PriorityQueue<>();
+        // 섞어야 하는 최소 횟수
+        int answer = 0; 
         
         // 우선 순위 큐에 삽입
+        PriorityQueue<Long> pq = new PriorityQueue<>();
         Arrays.stream(scoville).mapToLong(Long::valueOf).forEach(pq::offer);
         
         // 두 스코빌 지수 섞기
         while (pq.size() > 1) {
+            // 최소 스코빌이 K 이상이 될 때 종료
             if (pq.peek() >= K) {
                 return answer;
             }
