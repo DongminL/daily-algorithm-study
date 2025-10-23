@@ -23,17 +23,19 @@ class Solution {
             list[e[1]].add(e[0]);
         }
     
-        int[] moveCount = countMoves(1, n);
+        int[] moveCount = countMoving(1, n);
         int max = 0;    // 1번 노드에서 최대로 이동한 횟수
         
         // 가장 멀리 떨어진 노드의 개수 찾기
         for (int i = 2; i <= n; i++) {
+            if (max == moveCount[i]) {
+                answer++;
+                continue;
+            }
+            
             if (max < moveCount[i]) {
                 answer = 1;
                 max = moveCount[i];
-                
-            } else if (max == moveCount[i]) {
-                answer++;
             }
         }
     
@@ -41,7 +43,7 @@ class Solution {
     }
     
     // start -> end까지의 이동한 수 세기 (BFS)
-    private int[] countMoves(int start, int n) {
+    private int[] countMoving(int start, int n) {
         int[] moveCount = new int[n + 1];    // 1번에서 출발하여 각 노드까지 움직인 횟수
         
         Queue<Integer> queue = new ArrayDeque<>();
@@ -54,7 +56,6 @@ class Solution {
         while (!queue.isEmpty()) {
             int current = queue.poll();
             
-            // 다음 노드 방문 
             for (int next : list[current]) {
                 // 중복 방문은 제외
                 if (!visited[next]) {
