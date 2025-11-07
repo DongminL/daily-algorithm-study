@@ -7,9 +7,11 @@ class Solution {
         
         // 내림차순 정렬
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());  
-        Arrays.stream(priorities).forEach(pq::offer);
+        for (int priority : priorities) {
+            pq.offer(priority);
+        }
         
-        // location에 위치한 프로세스의 실행 알아내기
+        // location에 위치한 프로세스의 실행 순서 구하기
         while (!pq.isEmpty()) {
             for (int i = 0; i < priorities.length; i++) {
                 if (priorities[i] == pq.peek()) {
