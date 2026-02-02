@@ -1,6 +1,6 @@
 # [level 1] 이름이 없는 동물의 아이디 - 59039 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/59039?language=mysql) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/59039?language=oracle) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@ Empty
 
 ### 제출 일자
 
-2024년 09월 01일 15:08:45
+2026년 02월 02일 15:28:42
 
 ### 문제 설명
 
