@@ -1,6 +1,6 @@
 # [level 1] 이름이 있는 동물의 아이디 - 59407 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/59407?language=mysql) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/59407?language=oracle) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@ Empty
 
 ### 제출 일자
 
-2025년 11월 02일 13:17:17
+2026년 02월 03일 00:17:25
 
 ### 문제 설명
 
