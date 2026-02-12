@@ -1,6 +1,6 @@
 # [level 2] 입양 시각 구하기(1) - 59412 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/59412?language=mysql) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/59412?language=oracle) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@ Empty
 
 ### 제출 일자
 
-2024년 09월 01일 21:09:20
+2026년 02월 12일 22:34:04
 
 ### 문제 설명
 
