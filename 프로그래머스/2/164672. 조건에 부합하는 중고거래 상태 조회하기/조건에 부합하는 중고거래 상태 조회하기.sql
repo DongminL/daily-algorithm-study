@@ -1,10 +1,14 @@
 SELECT 
-    BOARD_ID, WRITER_ID, TITLE, PRICE, 
-    CASE 
-        WHEN `STATUS` = 'SALE' THEN '판매중'
-        WHEN `STATUS` = 'RESERVED' THEN '예약중'
-        WHEN `STATUS` = 'DONE' THEN '거래완료'
-    END AS `STATUS`
+    BOARD_ID,
+    WRITER_ID,
+    TITLE,
+    PRICE,
+    DECODE(
+        STATUS, 
+        'SALE', '판매중',
+        'RESERVED', '예약중',
+        'DONE', '거래완료'
+    ) AS STATUS
 FROM USED_GOODS_BOARD
-WHERE CREATED_DATE = '2022-10-05'
+WHERE CREATED_DATE = TO_DATE('2022-10-05', 'YYYY-MM-DD')
 ORDER BY BOARD_ID DESC;
