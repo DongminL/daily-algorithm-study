@@ -1,32 +1,19 @@
 class Solution {
     public String solution(String s) {
-        StringBuilder jadenCase = new StringBuilder();
-        boolean isWordFirst = true;    // 단어의 첫 글자인지 구분
+        StringBuilder answer = new StringBuilder();
         
-        // 단어로 분리
-        String[] strArray = s.trim().split(" ");
-        
-        // JadenCase로 변환
-        for (int i = 0; i < s.length(); i++) {
-            // 공백일 때
-            if (s.charAt(i) == ' ') {
-                jadenCase.append(" ");
-                
-                // 다음에 글자가 나오면 무조건 단어의 첫 글자
-                isWordFirst = true;
+        for (String word : s.split(" ", -1)) {
+            if (word.equals("")) {
+                answer.append(" ");
                 continue;
             }
             
-            // 공백이 아닐 때
-            if (isWordFirst) {
-                jadenCase.append(s.substring(i, i+1).toUpperCase());
-                
-                isWordFirst = false;
-            } else {
-                jadenCase.append(s.substring(i, i+1).toLowerCase());
-            }
+            answer.append(Character.toUpperCase(word.charAt(0)));
+            answer.append(word.substring(1, word.length()).toLowerCase());
+            answer.append(" ");
         }
+        answer.delete(answer.length() - 1, answer.length());
         
-        return jadenCase.toString();
+        return answer.toString();
     }
 }
