@@ -9,7 +9,7 @@ class Solution {
             }
             
             answer.append(Character.toUpperCase(word.charAt(0)));
-            answer.append(word.substring(1, word.length()).toLowerCase());
+            answer.append(word.substring(1).toLowerCase());
             answer.append(" ");
         }
         answer.delete(answer.length() - 1, answer.length());
