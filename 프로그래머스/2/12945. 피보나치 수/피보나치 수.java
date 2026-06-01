@@ -1,16 +1,16 @@
 class Solution {
     public int solution(int n) {
-        long answer = 1; // F(n)
-        long n1 = 1; // F(n-1)
-        long n2 = 0; // F(n-2)
-        final int DIV = 1234567;
+        long answer = 1;
+        long f1 = 1;
+        long f2 = 0;
         
-        // n일 때 피보나치 수 구하기
+        int DIV = 1234567;
+        
         for (int i = 3; i <= n; i++) {
-            n2 = n1;
-            n1 = answer;
+            f2 = f1;
+            f1 = answer;
             
-            answer = (n1 + n2) % DIV;
+            answer = (f1 + f2) % DIV;
         }
         
         return (int) answer % DIV;
