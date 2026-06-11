@@ -2,7 +2,6 @@ import java.util.*;
 
 class Solution {
     boolean solution(String s) {
-        boolean answer = true;
         Deque<Character> stack = new ArrayDeque<>();
         
         // 괄호쌍 확인
@@ -12,10 +11,11 @@ class Solution {
                 continue;
             } 
             
-            // 닫힌 괄호일 때
+            // 닫힌 괄호인데 쌍으로 이루어지지 않은 경우
             if (stack.isEmpty()) {
                 return false;
             }
+            
             stack.pollFirst();
         }
         
@@ -24,6 +24,6 @@ class Solution {
             return false;
         }
 
-        return answer;
+        return true;
     }
 }
